@@ -9,5 +9,7 @@ namespace ReportToMe.Services.Interfaces
 {
     public interface IRepository<T> where T : IEntity 
     {
+        Task<IEnumerable<T>> ListAllAsync();
+        IEnumerable<T> ListAll();
     }
 }

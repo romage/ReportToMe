@@ -21,8 +21,7 @@ namespace ReportToMe.Data
         DbSet<Project> Projects { get; set; }
         DbSet<Meeting> Meetings { get; set; }
         DbSet<MeetingUpdate> MeetingUpdates { get; set; }
+
         
-
-
     }
 }

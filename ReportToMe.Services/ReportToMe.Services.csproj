@@ -40,7 +40,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HomeService.cs" />
+    <Compile Include="MeetingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReportToMe.Interfaces\ReportToMe.Interfaces.csproj">
+      <Project>{c7398603-0775-47ae-8499-37fe2595420d}</Project>
+      <Name>ReportToMe.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportToMe.Models\ReportToMe.Models.csproj">
+      <Project>{f96eb2f4-982b-45e0-9781-a391a96492c0}</Project>
+      <Name>ReportToMe.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportToMe.Services.Interfaces\ReportToMe.Services.Interfaces.csproj">
+      <Project>{42fd7397-1b31-45d0-96ac-9903cc8e0664}</Project>
+      <Name>ReportToMe.Services.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportToMe.Web.Interfaces\ReportToMe.Web.Interfaces.csproj">
+      <Project>{405d99df-acb0-4c92-a3d9-7fd1b6d5a569}</Project>
+      <Name>ReportToMe.Web.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

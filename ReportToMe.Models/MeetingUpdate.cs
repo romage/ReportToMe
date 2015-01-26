@@ -14,6 +14,6 @@ namespace ReportToMe.Models
         public int ProjectId { get; set; }
         public virtual Meeting Meeting { get; set; }
         public virtual Project Project {get; set;}
-        public virtual Department Director { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

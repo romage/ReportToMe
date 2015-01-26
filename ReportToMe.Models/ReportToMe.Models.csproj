@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Department.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Meeting.cs" />
     <Compile Include="MeetingUpdate.cs" />
     <Compile Include="Project.cs" />

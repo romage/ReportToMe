@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReportToMe.Web.Interfaces
 {
-    public interface IProjectService
+    public interface IProjectService : IDisposable
     {
         IEnumerable<Project> List();
         IEnumerable<Project> List(Func<Project, bool> where);
