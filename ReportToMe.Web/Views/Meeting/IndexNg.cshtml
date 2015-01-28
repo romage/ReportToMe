@@ -1,0 +1,20 @@
+﻿<h1>Meetings</h1>
+
+<div> there are {{preloaded.length}} meetings</div>
+
+<div class="row">
+    <div ng-repeat="meeting in preloaded" class="row">
+        <meeting></meeting>
+      
+        <div class="row" ng-repeat="meetingUpdate in meeting.MeetingUpdates">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+                {{  meetingUpdate.Content }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<input type="hidden" value="@ViewBag.PreloadedData" name="preloaded" id="preloaded">
+

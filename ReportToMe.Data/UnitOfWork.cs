@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReportToMe.Data
 {
-    public class UnitOfWork: IUnitOfWork // <T>:  IUnitOfWork<T> where T: IEntity
+    public class UnitOfWork: IUnitOfWork, IDisposable // <T>:  IUnitOfWork<T> where T: IEntity
     {
         //private readonly IRepository<T> repository;
         private ReportToMeDataContext _ctx;
@@ -20,11 +20,6 @@ namespace ReportToMe.Data
             this._ctx = dbContext;
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         public void SaveChanges()
         {
             _ctx.SaveChanges();
@@ -34,6 +29,16 @@ namespace ReportToMe.Data
         public async Task<int> SaveChangesAsync()
         {
            return await _ctx.SaveChangesAsync();
+        }
+
+
+        public void Dispose()
+        {
+            if (_ctx != null)
+            {
+                _ctx.Dispose();
+                _ctx = null;
+            }
         }
     }
 }

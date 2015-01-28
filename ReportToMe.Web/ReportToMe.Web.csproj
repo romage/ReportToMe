@@ -52,6 +52,10 @@
       <HintPath>..\packages\Autofac.Owin.3.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -115,9 +119,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -182,38 +183,71 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MeetingsController.cs" />
+    <Compile Include="Controllers\MeetingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\JsonCamelCaseResult.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MeetingDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Directives\Meeting.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="NgViews\MeetingDetails.html" />
+    <Content Include="Scripts\App\Application.js" />
+    <Content Include="Scripts\App\contentCtrl.js" />
+    <Content Include="Scripts\App\Extensions.js" />
+    <Content Include="Scripts\App\meetingCtrl.js" />
+    <Content Include="Scripts\App\MeetingDetailCtrl.js" />
+    <Content Include="Scripts\Libs\bootstrap.js" />
+    <Content Include="Scripts\Libs\bootstrap.min.js" />
+    <None Include="Scripts\Libs\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Libs\jquery-1.10.2.js" />
+    <Content Include="Scripts\Libs\jquery-1.10.2.min.js" />
+    <None Include="Scripts\Libs\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Libs\jquery.validate.js" />
+    <Content Include="Scripts\Libs\jquery.validate.min.js" />
+    <Content Include="Scripts\Libs\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Libs\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Libs\angular-animate.js" />
+    <Content Include="Scripts\Libs\angular-animate.min.js" />
+    <Content Include="Scripts\Libs\angular-aria.js" />
+    <Content Include="Scripts\Libs\angular-aria.min.js" />
+    <Content Include="Scripts\Libs\angular-cookies.js" />
+    <Content Include="Scripts\Libs\angular-cookies.min.js" />
+    <Content Include="Scripts\Libs\angular-csp.css" />
+    <Content Include="Scripts\Libs\angular-loader.js" />
+    <Content Include="Scripts\Libs\angular-loader.min.js" />
+    <Content Include="Scripts\Libs\angular-messages.js" />
+    <Content Include="Scripts\Libs\angular-messages.min.js" />
+    <Content Include="Scripts\Libs\angular-mocks.js" />
+    <Content Include="Scripts\Libs\angular-resource.js" />
+    <Content Include="Scripts\Libs\angular-resource.min.js" />
+    <Content Include="Scripts\Libs\angular-route.js" />
+    <Content Include="Scripts\Libs\angular-route.min.js" />
+    <Content Include="Scripts\Libs\angular-sanitize.js" />
+    <Content Include="Scripts\Libs\angular-sanitize.min.js" />
+    <Content Include="Scripts\Libs\angular-scenario.js" />
+    <Content Include="Scripts\Libs\angular-touch.js" />
+    <Content Include="Scripts\Libs\angular-touch.min.js" />
+    <Content Include="Scripts\Libs\angular.js" />
+    <Content Include="Scripts\Libs\angular.min.js" />
+    <Content Include="Scripts\Libs\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Libs\respond.js" />
+    <Content Include="Scripts\Libs\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -228,8 +262,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\Libs\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -250,11 +283,25 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Meetings\Create.cshtml" />
-    <Content Include="Views\Meetings\Delete.cshtml" />
-    <Content Include="Views\Meetings\Details.cshtml" />
-    <Content Include="Views\Meetings\Edit.cshtml" />
-    <Content Include="Views\Meetings\Index.cshtml" />
+    <Content Include="Views\Meeting\Create.cshtml" />
+    <Content Include="Views\Meeting\Delete.cshtml" />
+    <Content Include="Views\Meeting\Details.cshtml" />
+    <Content Include="Views\Meeting\Edit.cshtml" />
+    <Content Include="Views\Meeting\Index.cshtml" />
+    <Content Include="Views\Meeting\_MeetingUpdates.cshtml" />
+    <Content Include="Scripts\Libs\angular-animate.min.js.map" />
+    <Content Include="Scripts\Libs\angular-aria.min.js.map" />
+    <Content Include="Scripts\Libs\angular-cookies.min.js.map" />
+    <Content Include="Scripts\Libs\angular-loader.min.js.map" />
+    <Content Include="Scripts\Libs\angular-messages.min.js.map" />
+    <Content Include="Scripts\Libs\angular-resource.min.js.map" />
+    <Content Include="Scripts\Libs\angular-route.min.js.map" />
+    <Content Include="Scripts\Libs\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\Libs\angular-touch.min.js.map" />
+    <Content Include="Scripts\Libs\angular.min.js.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\IndexNg.cshtml" />
+    <Content Include="Views\Meeting\IndexNg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

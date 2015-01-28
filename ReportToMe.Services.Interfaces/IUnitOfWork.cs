@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace ReportToMe.Services.Interfaces
 {
-    public interface IUnitOfWork// <T>: IDisposable where T: IEntity
+    public interface IUnitOfWork: IDisposable// <T>: IDisposable where T: IEntity
     {
         void SaveChanges();
         Task<int> SaveChangesAsync();
+        //void Dispose(); 
     }
 }

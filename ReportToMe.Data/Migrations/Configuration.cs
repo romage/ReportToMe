@@ -1,5 +1,6 @@
 namespace ReportToMe.Data.Migrations
 {
+    using ReportToMe.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -10,22 +11,38 @@ namespace ReportToMe.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            
         }
 
         protected override void Seed(ReportToMe.Data.ReportToMeDataContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            
+            context.Set<Project>().AddOrUpdate(
+                proj=>proj.Description,
+                    new Project{ Description="test project 1", Id=1},
+                    new Project {Description = "test project 2", Id=2}
+                );
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            context.Set<Department>().AddOrUpdate(
+                dept => dept.Name,
+                    new Department{ Name="finance", Id=1},
+                    new Department{ Name="technology", Id=2}, 
+                    new Department { Name ="marketing", Id=3}
+                );
+
+            context.Set<Meeting>().AddOrUpdate(
+                i => i.Description,
+                    new Meeting
+                    {
+                        Id = 1,
+                        Description = "test 1 meeting",
+                        MeetingDate = DateTime.Now,
+                        MeetingUpdates = {
+                            new MeetingUpdate{ Id = 1, ProjectId=1, DepartmentId=1, Content="test update from the finance dept"},
+                            new MeetingUpdate{ Id=2, ProjectId=1, DepartmentId=2, Content="test updated from the tech dept"}
+                        }
+                    }
+                );
         }
     }
 }

@@ -24,8 +24,7 @@ namespace ReportToMe.Web.App_Start
             var builder = new ContainerBuilder();
             var mvcAssembly = typeof(MvcApplication).Assembly;
             var svcAssembly = typeof(HomeService).Assembly;
-
-            //var repoAssembly = typeof(RepositoryBase).Assembly;
+            var repoAssembly = typeof(RepositoryBase).Assembly;
 
             builder
                 .RegisterType(typeof(ReportToMeDataContext))
@@ -33,21 +32,20 @@ namespace ReportToMe.Web.App_Start
                 .InstancePerLifetimeScope();
 
             builder
-               .RegisterGeneric(typeof(ReportToMe.Data.Repository<>))
-               .As(typeof(IRepository<>));
+                .RegisterGeneric(typeof(ReportToMe.Data.Repository<>))
+                .As(typeof(IRepository<>));
 
-            //builder.RegisterGeneric(typeof(ReportToMe.Data.UnitOfWork<>))
-            //    .As(typeof(IUnitOfWork<>));
             builder
                 .RegisterType(typeof(UnitOfWork))
                 .As(typeof(IUnitOfWork));
 
+            builder.RegisterAssemblyTypes(svcAssembly)
+                .Where(t => t.Name.EndsWith("Service"))
+                .AsImplementedInterfaces();
 
-            //builder.RegisterAssemblyTypes(mvcAssembly)
-            //    .Where(t => t.Name.EndsWith("Service"))
-            //    .AsImplementedInterfaces();
-
-            builder.RegisterType<HomeService>().As<IHomeService>();
+            builder
+                .RegisterType<DepartmentRepository>()
+                .As<IDepartmentRepository>();
 
             builder.RegisterControllers(mvcAssembly);
 

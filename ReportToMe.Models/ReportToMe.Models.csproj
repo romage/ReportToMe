@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Department.cs" />
+    <Compile Include="DepartmentsForMeeting.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Meeting.cs" />
     <Compile Include="MeetingUpdate.cs" />
@@ -50,10 +51,6 @@
     <ProjectReference Include="..\ReportToMe.Interfaces\ReportToMe.Interfaces.csproj">
       <Project>{c7398603-0775-47ae-8499-37fe2595420d}</Project>
       <Name>ReportToMe.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ReportToMe.Services.Interfaces\ReportToMe.Services.Interfaces.csproj">
-      <Project>{42fd7397-1b31-45d0-96ac-9903cc8e0664}</Project>
-      <Name>ReportToMe.Services.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDepartmentRepository.cs" />
     <Compile Include="IMeetingRepository.cs" />
     <Compile Include="IProjectRepository.cs" />
     <Compile Include="IRepository.cs" />
@@ -49,6 +50,10 @@
     <ProjectReference Include="..\ReportToMe.Interfaces\ReportToMe.Interfaces.csproj">
       <Project>{c7398603-0775-47ae-8499-37fe2595420d}</Project>
       <Name>ReportToMe.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportToMe.Models\ReportToMe.Models.csproj">
+      <Project>{f96eb2f4-982b-45e0-9781-a391a96492c0}</Project>
+      <Name>ReportToMe.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

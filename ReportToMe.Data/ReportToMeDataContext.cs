@@ -17,11 +17,22 @@ namespace ReportToMe.Data
             
         }
 
-        DbSet<Department> Departments { get; set; }
-        DbSet<Project> Projects { get; set; }
-        DbSet<Meeting> Meetings { get; set; }
-        DbSet<MeetingUpdate> MeetingUpdates { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<MeetingUpdate> MeetingUpdates { get; set; }
 
-        
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            //modelBuilder
+            //    .Entity<Department>()
+            //        .Property(b => b.Name)
+            //            .HasMaxLength(20);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

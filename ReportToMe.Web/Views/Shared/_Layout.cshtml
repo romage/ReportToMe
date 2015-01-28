@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="reportToMe">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
 
 </head>
 <body>
+    <input type="hidden" id="baseUrl" value="@Url.Content("~/")" />
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -21,9 +22,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="/#/Meetings/">Meetings</a></li>
+                    <li> <a href="/#/Projects/">Projects</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,7 +38,9 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Libs/angular.js")
+    @Scripts.Render("~/bundles/Libs/bootstrap")
+    @Scripts.Render("~/bundles/appCode")
     @RenderSection("scripts", required: false)
 </body>
 </html>

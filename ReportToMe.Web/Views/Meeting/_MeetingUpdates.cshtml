@@ -1,0 +1,24 @@
+﻿@model List<ReportToMe.Models.DepartmentsForMeeting>
+
+
+<table class="table">
+    <tr>
+        <th>Department name</th>
+        <th>Content</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department.Name)
+        </td>
+            <td>
+                @if (item.HasCompleted)
+                {
+                    @Html.DisplayFor(modelItem => item.MeetingUpdate.Content)
+                }
+            </td>
+    </tr>
+}
+
+</table>

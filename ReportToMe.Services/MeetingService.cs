@@ -11,13 +11,15 @@ namespace ReportToMe.Services
 {
     public class MeetingService: IMeetingService
     {
+        IDepartmentRepository _departments;
         IRepository<Meeting> _repo;
         IUnitOfWork  _uow;
 
-        public MeetingService(IRepository<Meeting> repository, IUnitOfWork unitOfWork)
+        public MeetingService(IRepository<Meeting> repository, IUnitOfWork unitOfWork, IDepartmentRepository departments)
         {
             this._repo = repository;
             this._uow = unitOfWork;
+            this._departments = departments;
         }
 
         public async Task<IEnumerable<Meeting>> ListMeetingsAsync()
@@ -32,7 +34,7 @@ namespace ReportToMe.Services
 
         public IEnumerable<Meeting> List()
         {
-            throw new NotImplementedException();
+            return _repo.ListAll();
         }
 
         public IEnumerable<Meeting> List(Func<Meeting, bool> where)
@@ -42,27 +44,58 @@ namespace ReportToMe.Services
 
         public Meeting Find(Func<Meeting, bool> where)
         {
-            throw new NotImplementedException();
+            return _repo.ListAll().Where(where).FirstOrDefault();
         }
 
         public Meeting Add(Meeting entity)
         {
-            throw new NotImplementedException();
+            _repo.Add(entity);
+            _uow.SaveChanges();
+            return entity;
         }
+
+        public async Task<Meeting> AddAsync(Meeting entity)
+        {
+            _repo.Add(entity);
+            Task t = _uow.SaveChangesAsync();
+            await t;
+            return entity;
+        }
+
+        
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            var entity = _repo.Find(Id);
+            return Delete(entity);
         }
 
         public bool Delete(Meeting entity)
         {
-            throw new NotImplementedException();
+            _repo.Delete(entity);
+            _uow.SaveChanges();
+            return true;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _repo.Dispose();
+            _uow.Dispose();
+        }
+
+
+        //public IEnumerable<Department> GetDepartmentList()
+        //{
+        //    return _departments.
+        //            .ListAll()
+        //            .OrderBy(et=>et.Name).ToList();
+        //}
+
+        public IEnumerable<DepartmentsForMeeting> GetDepartmentForMeetingsList(int meetingId)
+        {
+            return _departments
+                    .DepartmentsForMeeting(meetingId);
+                    
         }
     }
 }

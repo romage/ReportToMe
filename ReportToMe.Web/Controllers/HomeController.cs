@@ -19,5 +19,10 @@ namespace ReportToMe.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult IndexNg()
+        {
+            return PartialView();
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ReportToMe.Interfaces;
-using ReportToMe.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +11,11 @@ namespace ReportToMe.Models
     {
         public int Id { get; set; }
         public int ProjectId { get; set; }
+        public int DepartmentId { get; set; }
+        public int MeetingId { get; set; }
         public virtual Meeting Meeting { get; set; }
         public virtual Project Project {get; set;}
         public virtual Department Department { get; set; }
+        public string Content { get; set; }
     }
 }

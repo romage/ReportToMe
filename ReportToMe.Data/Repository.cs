@@ -9,27 +9,75 @@ using System.Threading.Tasks;
 
 namespace ReportToMe.Data
 {
-    public class Repository<T> : IRepository<T> where T: IEntity
+    public class Repository<T> : IRepository<T> where T : class, IEntity
     {
         private ReportToMeDataContext _ctx;
+        
+        private DbSet<T> _tmpSet = null;
+        private DbSet<T> _set {
+            get {
+                var ret = _tmpSet;
+                if (ret== null)
+                    ret= _ctx.Set<T>();
+
+                return ret;
+            }
+        }
 
         public Repository(ReportToMeDataContext dbContext)
         {
             this._ctx = dbContext;
         }
-        public void Dispose()
+
+
+        public virtual Task<IEnumerable<T>> ListAllAsync()
         {
-            
+            return getAllAsync();
+
         }
 
-        public Task<IEnumerable<T>> ListAllAsync()
+        public virtual IEnumerable<T> ListAll()
         {
-            throw new NotImplementedException();
+            return _set;
         }
 
-        public IEnumerable<T> ListAll()
+        async Task<IEnumerable<T>> getAllAsync()
         {
-            throw new NotImplementedException();
+            return await _set.ToListAsync();
         }
+
+        public virtual T Find(int id)
+        {
+            return _set.Find(id);
+        }
+        
+        public virtual T Add(T entity)
+        {
+            _ctx.Entry<T>(entity).State = EntityState.Added;
+            return entity;
+        }
+
+        public virtual T Update(T entity)
+        {
+            _ctx.Entry<T>(entity).State = EntityState.Modified;
+            return entity;
+        }
+
+        public virtual void Delete(T entity)
+        {
+            _ctx.Entry<T>(entity).State = EntityState.Deleted;
+        }
+
+
+        public virtual void Dispose()
+        {
+            if (_ctx != null)
+            {
+                _ctx.Dispose();
+                _ctx = null;
+            }
+        }
+
+       
     }
 }
