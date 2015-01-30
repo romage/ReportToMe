@@ -9,10 +9,13 @@ namespace ReportToMe.Models
 {
     public class Department :IEntity
     {
+        public Department()
+        {
+            this.DepartmentUpdates = new List<DepartmentUpdate>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Meeting> Meetings { get; set; }
-        public ICollection<MeetingUpdate> MeetingUpdates { get; set; }
+        ICollection<DepartmentUpdate> DepartmentUpdates { get; set; }
       
     }
 }

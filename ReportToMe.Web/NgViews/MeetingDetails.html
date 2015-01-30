@@ -1,1 +1,29 @@
-﻿
+﻿<h2>Meeting Details</h2>
+
+
+<h3>{{ data.meeting.description}} ({{ data.meeting.meetingDate | date: "yyyy-MM-dd" }})</h3>
+
+
+<div class="row" ng-repeat="meetingProject in data.meeting.meetingProjects">
+    <div class="col-md-12"><h4>{{ meetingProject.project.name}}</h4></div>
+    <div class="row" ng-repeat="departmentUpdate in meetingProject.departmentUpdates">
+        <div class="col-md-3 col-md-offset-1">{{departmentUpdate.department.name}}</div>
+        <div id="{{ 'ducontent-' + meetingProject.id + '-' + departmentUpdate.department.id + '-' + departmentUpdate.id}}"
+             class="col-md-6"
+             data-dept-id="{{ departmentUpdate.department.i
+             data-mp-id="{{meetingProject.id}}"
+             contenteditable="true">
+            {{departmentUpdate.content}}
+            departmentId: {{ departmentUpdate.department.id}}
+            id: {{departmentUpdate.id}}
+            meeting project id: {{meetingProject.id}}
+        </div>
+        <div class="col-md-2 ">
+            <div class="btn-group">
+                <button class="btn btn-sm btn-info" ng-click="save()" value="save changes">save</button>
+                <button class="btn btn-sm  btn-info" ng-click="cancel()" value="cancel changes">cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

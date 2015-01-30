@@ -32,23 +32,12 @@ namespace ReportToMe.Web.Controllers
             return View(await _svc.ListMeetingsAsync());
         }
 
-        private JsonSerializerSettings jsonSetting() { 
-            return new JsonSerializerSettings { 
-                        Formatting= Newtonsoft.Json.Formatting.Indented,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore, 
-                        ContractResolver = new CamelCasePropertyNamesContractResolver() 
-                        };
-        }
-
-        public ActionResult IndexNg()
+        public async Task<ActionResult> GetMeetings()
         {
-            var model =  _svc.List().ToList();
-           
-            var modelJson = JsonConvert.SerializeObject(model,jsonSetting());
-            ViewBag.PreloadedData = modelJson;
-            return PartialView();
+           return Json(await _svc.ListMeetingsAsync());
         }
 
+        
         // GET: Meetings/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -61,7 +50,8 @@ namespace ReportToMe.Web.Controllers
             Meeting meeting = null;
             var getMeetingAsync = Task.Factory.StartNew(() =>
             {
-                meeting = _svc.Find(et => et.Id == id.Value);
+                //meeting = _svc.Find(et => et.Id == id.Value);
+                meeting = _svc.MeetingsWithAllDepartments(id.Value);
             });
             await getMeetingAsync;
             
@@ -70,30 +60,40 @@ namespace ReportToMe.Web.Controllers
                 return HttpNotFound();
             }
             model.Meeting = meeting;
-            model.DepartmentsForMeetings = _svc.GetDepartmentForMeetingsList(id.Value).ToList();
+
+            if (Request.IsAjaxRequest() || Request.AcceptTypes.Contains("application/json"))
+            {
+                return Json(model);
+            }
             return View(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> DetailsJson(int? id)
+        public ActionResult UpdateContent(int meetingProjectId,int departmentId, int departmentUpdateId, string newContent)
         {
-            var model = new MeetingDetailsModel();
+            var success= _svc.UpdateContent(meetingProjectId, departmentId, departmentUpdateId, newContent);
+            return Json(success);
+        }
 
-            Meeting meeting = null;
-            var getMeetingAsync = Task.Factory.StartNew(() =>
-            {
-                meeting = _svc.Find(et => et.Id == id.Value);
-            });
-            await getMeetingAsync;
+       
+        //public async Task<ActionResult> Details(int? id)
+        //{
+        //    var model = new MeetingDetailsModel();
 
-            if (meeting == null)
-            {
-                return HttpNotFound();
-            }
-            model.Meeting = meeting;
-            model.DepartmentsForMeetings = _svc.GetDepartmentForMeetingsList(id.Value).ToList();
-            return Json(model);
-        } 
+        //    Meeting meeting = null;
+        //    var getMeetingAsync = Task.Factory.StartNew(() =>
+        //    {
+        //        meeting = _svc.Find(et => et.Id == id.Value);
+        //    });
+        //    await getMeetingAsync;
+
+        //    if (meeting == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    model.Meeting = meeting;
+        //    return Json(model);
+        //} 
 
         // GET: Meetings/Create
         public ActionResult Create()

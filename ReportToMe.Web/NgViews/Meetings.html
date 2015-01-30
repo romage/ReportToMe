@@ -1,0 +1,15 @@
+﻿<h1>Past Meetings</h1>
+
+<div class="row" ng-repeat="meeting in meetings">
+    <div class="col-md-2">{{meeting.meetingDate | date : "dd/MM/yyyy"}}</div>
+    <div class="col-md-7">{{meeting.description}}</div>
+    <div class="col-md-3"><a href="#/Meetings/Details/{{meeting.id}}">view details</a></div>
+        <div class="row" ng-repeat="meetingProject in meeting.meetingProjects">
+            <div class="col-md-11 col-md-offset-1">{{ meetingProject.project.name}}</div>
+            <div class="row" ng-repeat="departmentUpdate in meetingProject.departmentUpdates">
+                <div class="col-md-3 col-md-offset-2">{{departmentUpdate.department.name}}</div>
+                <div class="col-md-7">{{departmentUpdate.content}}</div>
+            </div>
+        </div>
+    <hr />
+</div>

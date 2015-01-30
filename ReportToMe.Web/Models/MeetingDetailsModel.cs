@@ -9,7 +9,6 @@ namespace ReportToMe.Web.Models
     public class MeetingDetailsModel
     {
         public Meeting Meeting { get; set; }
-        //public List<Department> AllDepartments { get; set; }
-        public List<DepartmentsForMeeting> DepartmentsForMeetings { get; set; }
+       
     }
 }

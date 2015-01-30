@@ -11,12 +11,12 @@ namespace ReportToMe.Models
     {
         public Meeting()
         {
-            MeetingUpdates = new List<MeetingUpdate>();
+            MeetingProjects = new List<MeetingProject>();
         }
         public int Id { get; set; }
         public DateTime MeetingDate { get; set; }
         public string Description { get; set; }
-        public virtual List<MeetingUpdate> MeetingUpdates { get; set; }
+        public virtual ICollection<MeetingProject> MeetingProjects {get; set ;}
         
     }
 }

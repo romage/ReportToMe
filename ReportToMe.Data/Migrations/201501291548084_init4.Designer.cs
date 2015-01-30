@@ -7,18 +7,18 @@ namespace ReportToMe.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class init3 : IMigrationMetadata
+    public sealed partial class init4 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init4));
         
         string IMigrationMetadata.Id
         {
-            get { return "201501270950253_init3"; }
+            get { return "201501291548084_init4"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

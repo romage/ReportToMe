@@ -11,15 +11,13 @@ namespace ReportToMe.Services
 {
     public class MeetingService: IMeetingService
     {
-        IDepartmentRepository _departments;
-        IRepository<Meeting> _repo;
+        IMeetingRepository _repo;
         IUnitOfWork  _uow;
 
-        public MeetingService(IRepository<Meeting> repository, IUnitOfWork unitOfWork, IDepartmentRepository departments)
+        public MeetingService(IMeetingRepository repository, IUnitOfWork unitOfWork)
         {
             this._repo = repository;
             this._uow = unitOfWork;
-            this._departments = departments;
         }
 
         public async Task<IEnumerable<Meeting>> ListMeetingsAsync()
@@ -83,19 +81,15 @@ namespace ReportToMe.Services
             _uow.Dispose();
         }
 
-
-        //public IEnumerable<Department> GetDepartmentList()
-        //{
-        //    return _departments.
-        //            .ListAll()
-        //            .OrderBy(et=>et.Name).ToList();
-        //}
-
-        public IEnumerable<DepartmentsForMeeting> GetDepartmentForMeetingsList(int meetingId)
+        public Meeting MeetingsWithAllDepartments(int meetingId)
         {
-            return _departments
-                    .DepartmentsForMeeting(meetingId);
-                    
+            return _repo.MeetingsWithAllDepartments(meetingId);
+        }
+
+
+        public bool UpdateContent(int meetingProjectId, int departmentId, int departmentUpdateId, string newContent)
+        {
+            return _repo.UpdateContent(meetingProjectId, departmentId, departmentUpdateId, newContent);
         }
     }
 }

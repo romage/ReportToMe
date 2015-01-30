@@ -15,14 +15,13 @@ namespace ReportToMe.Web.Interfaces
 
         IEnumerable<Meeting> List();
         IEnumerable<Meeting> List(Func<Meeting, bool> where);
+        Meeting MeetingsWithAllDepartments(int meetingId);
         Meeting Find(Func<Meeting, bool> where);
         Meeting Add(Meeting entity);
-        //Task<Meeting> AddAsync(Meeting entity);
-
-       // IEnumerable<Department> GetDepartmentList();
-        IEnumerable<DepartmentsForMeeting> GetDepartmentForMeetingsList(int meetingId);
-
+     
         bool Delete(int Id);
         bool Delete(Meeting entity);
+
+        bool UpdateContent(int meetingProjectId,int departmentId, int departmentUpdateId, string newContent);
     }
 }

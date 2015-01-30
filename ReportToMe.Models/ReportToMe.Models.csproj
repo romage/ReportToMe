@@ -40,11 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Department.cs" />
-    <Compile Include="DepartmentsForMeeting.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Meeting.cs" />
-    <Compile Include="MeetingUpdate.cs" />
+    <Compile Include="MeetingProject.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="DepartmentUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

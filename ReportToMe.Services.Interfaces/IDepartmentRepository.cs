@@ -9,6 +9,6 @@ namespace ReportToMe.Services.Interfaces
 {
     public interface IDepartmentRepository : IRepository<Department>
     {
-        IEnumerable<DepartmentsForMeeting> DepartmentsForMeeting(int meetingId);
+        
     }
 }

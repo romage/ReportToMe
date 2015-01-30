@@ -9,6 +9,11 @@ reportToMe.directive('meeting', function () {
         restrict: 'E',
         templateUrl: "/Directives/Meeting.html"
     }
+}).directive('meetingupdate', function () {
+    return {
+        restrict: 'E',
+        templateUrl: "/Directives/MeetingUpdate.html"
+    }
 });
 
 reportToMe.config(function ($routeProvider) {
@@ -20,7 +25,7 @@ reportToMe.config(function ($routeProvider) {
             controller: "ContentController"
         })
         .when("/Meetings", {
-            templateUrl: "Meeting/IndexNg",
+            templateUrl: "NgViews/Meetings.html",
             controller: "MeetingController"
         })
         .when("/Meetings/Details/:id", {

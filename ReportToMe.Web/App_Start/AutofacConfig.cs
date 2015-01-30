@@ -44,8 +44,8 @@ namespace ReportToMe.Web.App_Start
                 .AsImplementedInterfaces();
 
             builder
-                .RegisterType<DepartmentRepository>()
-                .As<IDepartmentRepository>();
+                .RegisterType<MeetingRepository>()
+                .As<IMeetingRepository>();
 
             builder.RegisterControllers(mvcAssembly);
 

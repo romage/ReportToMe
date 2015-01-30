@@ -47,23 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DepartmentRepository.cs" />
-    <Compile Include="Migrations\201501261201354_init2.cs" />
-    <Compile Include="Migrations\201501261201354_init2.Designer.cs">
-      <DependentUpon>201501261201354_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501270950253_init3.cs" />
-    <Compile Include="Migrations\201501270950253_init3.Designer.cs">
-      <DependentUpon>201501270950253_init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501271108577_init4.cs" />
-    <Compile Include="Migrations\201501271108577_init4.Designer.cs">
-      <DependentUpon>201501271108577_init4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501271228399_init5.cs" />
-    <Compile Include="Migrations\201501271228399_init5.Designer.cs">
-      <DependentUpon>201501271228399_init5.cs</DependentUpon>
+    <Compile Include="MeetingRepository.cs" />
+    <Compile Include="Migrations\201501291548084_init4.cs" />
+    <Compile Include="Migrations\201501291548084_init4.Designer.cs">
+      <DependentUpon>201501291548084_init4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ProjectRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportToMeDataContext.cs" />
     <Compile Include="Repository.cs" />
@@ -89,17 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201501261201354_init2.resx">
-      <DependentUpon>201501261201354_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501270950253_init3.resx">
-      <DependentUpon>201501270950253_init3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501271108577_init4.resx">
-      <DependentUpon>201501271108577_init4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501271228399_init5.resx">
-      <DependentUpon>201501271228399_init5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201501291548084_init4.resx">
+      <DependentUpon>201501291548084_init4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
